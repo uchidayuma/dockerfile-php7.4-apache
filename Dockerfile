@@ -6,8 +6,6 @@ COPY ./ssmtp.conf /etc/ssmtp/ssmtp.conf
 ARG TZ=Asia/Tokyo
 
 RUN apt-get update \
-  #&& apt-get --update --no-cache \
-  #&& apt-get install icu-dev \
   && apt-get install -y libzip-dev \
   && apt-get install -y libonig-dev \
   && apt-get install -y zlib1g-dev \
@@ -23,7 +21,6 @@ RUN apt-get update && apt-get install -y \
         libjpeg62-turbo-dev \
         libmcrypt-dev \
         libpng-dev \
-    #&& docker-php-ext-configure gd --with-png=/usr/include/ --with-jpeg=/usr/include/ --with-freetype=/usr/include/ \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd exif
 
